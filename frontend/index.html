@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Database</title>
+    <link rel="stylesheet" href="styles.css">
     <script defer src="scripts.js"></script>
   </head>
   <body>
+    <ul id="getReq">
+    </ul>
+    <button type="button" value="Get" onclick="apiGet()">Refresh</button>
     <form>
+      <label for="idNum">ID Number:</label><br>
+      <br>
+      <input type="text" id="idNum" placeholder="ID Number"><br>
+      <br>
       <label for="firstName">First Name:</label><br>
       <br>
       <input type="text" id="apiFN" placeholder="First Name"><br>
@@ -22,7 +30,6 @@
       <br>
       <!-- crud -->
       <input type="button" value="Post" onclick="apiPost()"><br>
-      <input type="button" value="Get" onclick="apiGet()"><br>
       <input type="button" value="Put" onclick="apiPut()"><br>
       <input type="button" value="Delete" onclick="apiDelete()"><br>
     </form>
