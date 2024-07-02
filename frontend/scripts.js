@@ -36,6 +36,19 @@ fetch("http://localhost:8080/api/users")
     dbDataEm = document.createElement("td");
     dbDataEm.innerText = `${data[1].email}`;
     document.getElementById("secondRow").appendChild(dbDataEm);
+    // third entry
+    dbData = document.createElement("td");
+    dbData.innerText = `${data[2].id}`;
+    document.getElementById("thirdRow").appendChild(dbData);
+    dbDataFN = document.createElement("td");
+    dbDataFN.innerText = `${data[2].firstName}`;
+    document.getElementById("thirdRow").appendChild(dbDataFN);
+    dbDataLN = document.createElement("td");
+    dbDataLN.innerText = `${data[2].lastName}`;
+    document.getElementById("thirdRow").appendChild(dbDataLN);
+    dbDataEm = document.createElement("td");
+    dbDataEm.innerText = `${data[2].email}`;
+    document.getElementById("thirdRow").appendChild(dbDataEm);
   })
 
   // handle errors
@@ -89,6 +102,19 @@ function apiGet() {
       dbDataEm = document.createElement("td");
       dbDataEm.innerText = `${data[1].email}`;
       document.getElementById("secondRow").appendChild(dbDataEm);
+      // third entry
+      dbData = document.createElement("td");
+      dbData.innerText = `${data[2].id}`;
+      document.getElementById("thirdRow").appendChild(dbData);
+      dbDataFN = document.createElement("td");
+      dbDataFN.innerText = `${data[2].firstName}`;
+      document.getElementById("thirdRow").appendChild(dbDataFN);
+      dbDataLN = document.createElement("td");
+      dbDataLN.innerText = `${data[2].lastName}`;
+      document.getElementById("thirdRow").appendChild(dbDataLN);
+      dbDataEm = document.createElement("td");
+      dbDataEm.innerText = `${data[2].email}`;
+      document.getElementById("thirdRow").appendChild(dbDataEm);
     })
 
     // handle errors
@@ -142,9 +168,9 @@ function apiPost() {
 // change user
 function apiPut() {
   const idNum = document.getElementById("idNum").value;
-  const firstName = document.getElementById("apiFN").value;
-  const lastName = document.getElementById("apiLN").value;
-  const email = document.getElementById("email").value;
+  const firstName = document.getElementById("apinFN").value;
+  const lastName = document.getElementById("apinLN").value;
+  const email = document.getElementById("nemail").value;
 
   // API endpoint for creating a new user
   const apiUrl = `http://localhost:8080/api/users/${idNum}`;
@@ -185,9 +211,9 @@ function apiPut() {
 // add new user
 function apiDelete() {
   const idNum = document.getElementById("idNum").value;
-  const firstName = document.getElementById("apiFN").value;
-  const lastName = document.getElementById("apiLN").value;
-  const email = document.getElementById("email").value;
+  const firstName = document.getElementById("apinFN").value;
+  const lastName = document.getElementById("apinLN").value;
+  const email = document.getElementById("nemail").value;
 
   // API endpoint for creating a new user
   const apiUrl = `http://localhost:8080/api/users/${idNum}`;
