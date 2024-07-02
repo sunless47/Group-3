@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#add-user-form {
+    margin-bottom: 20px;
+}
+
+#user-list {
+    margin-top: 20px;
+}
+
+#user-list-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#user-list-ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#user-list-ul li:last-child {
+    border-bottom: none;
+}
+
+#update-user-form {
+    display: none;
+    margin-top: 20px;
+}
+
+button {
+    margin: 10px;
+}
