@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Database</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="scripts.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <ul id="getReq">
+    </ul>
+    <button class="button1" type="button" value="Get" onclick="apiGet()">Refresh</button>
+    <div class="form-box">
+      <form>
+        <div class="input-field">
+        <label for="idNum">ID Number:</label><br>
+        <br>
+        <input type="text" id="idNum" placeholder="ID Number"><br>
+        <br>
+        <label for="firstName">First Name:</label><br>
+        <br>
+        <input type="text" id="apiFN" placeholder="First Name"><br>
+        <br>
+        <label for="secondName">Last Name:</label><br>
+        <br>
+        <input type="text" id="apiLN" placeholder="Last Name"><br>
+        <br>
+        <label for="email">Email:</label><br>
+        <br>
+        <input type="text" id="email" placeholder="Email"><br>
+        <br>
+        <!-- crud -->
+        <input class="post" type="button" value="Post" onclick="apiPost()"><br>
+        <input class="put" type="button" value="Put" onclick="apiPut()"><br>
+        <input class="del" type="button" value="Delete" onclick="apiDelete()"><br>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>
