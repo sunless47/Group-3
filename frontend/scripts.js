@@ -1,251 +1,162 @@
-/********** Get on init ***********/
-// using fetch api request method
-fetch("http://localhost:8080/api/users")
-  .then((response) => {
-    // test if response is ok
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error("Network Response Error");
-    }
-  })
-  .then((data) => {
-    // first entry
-    let dbData = document.createElement("td");
-    dbData.innerText = `${data[0].id}`;
-    document.getElementById("firstRow").appendChild(dbData);
-    let dbDataFN = document.createElement("td");
-    dbDataFN.innerText = `${data[0].firstName}`;
-    document.getElementById("firstRow").appendChild(dbDataFN);
-    let dbDataLN = document.createElement("td");
-    dbDataLN.innerText = `${data[0].lastName}`;
-    document.getElementById("firstRow").appendChild(dbDataLN);
-    let dbDataEm = document.createElement("td");
-    dbDataEm.innerText = `${data[0].email}`;
-    document.getElementById("firstRow").appendChild(dbDataEm);
-    // second entry
-    dbData = document.createElement("td");
-    dbData.innerText = `${data[1].id}`;
-    document.getElementById("secondRow").appendChild(dbData);
-    dbDataFN = document.createElement("td");
-    dbDataFN.innerText = `${data[1].firstName}`;
-    document.getElementById("secondRow").appendChild(dbDataFN);
-    dbDataLN = document.createElement("td");
-    dbDataLN.innerText = `${data[1].lastName}`;
-    document.getElementById("secondRow").appendChild(dbDataLN);
-    dbDataEm = document.createElement("td");
-    dbDataEm.innerText = `${data[1].email}`;
-    document.getElementById("secondRow").appendChild(dbDataEm);
-    // third entry
-    dbData = document.createElement("td");
-    dbData.innerText = `${data[2].id}`;
-    document.getElementById("thirdRow").appendChild(dbData);
-    dbDataFN = document.createElement("td");
-    dbDataFN.innerText = `${data[2].firstName}`;
-    document.getElementById("thirdRow").appendChild(dbDataFN);
-    dbDataLN = document.createElement("td");
-    dbDataLN.innerText = `${data[2].lastName}`;
-    document.getElementById("thirdRow").appendChild(dbDataLN);
-    dbDataEm = document.createElement("td");
-    dbDataEm.innerText = `${data[2].email}`;
-    document.getElementById("thirdRow").appendChild(dbDataEm);
-  })
+/************************************/
+/********** Register user ***********/
+/************************************/
+async function register() {
+  const username = document.getElementById('username').value;
+  const phone = document.getElementById('phone').value;
+  const password = document.getElementById('password').value;
 
-  // handle errors
-  .catch((error) => {
-    console.error("Error: ", error);
+  // Form data to be sent in the request body
+  const newUser = {
+    username: username,
+    phone: phone,
+    password: password,
+  };
+
+  // API endpoint for creating a new user
+  let registrationApi = new URL('http://localhost:8080/api/user');
+
+  // Posting the data to the api using fetch method
+  let newUserData = await fetch(registrationApi, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+    // send the registeredUser in json format
+    body: JSON.stringify(newUser),
   });
 
-/********** Get ***********/
-// get data from api
-function apiGet() {
-  // rm outdated list
-  let rowOne = document.getElementById("firstRow");
-  rowOne.innerHTML = "";
-  let rowTwo = document.getElementById("secondRow");
-  rowTwo.innerHTML = "";
+  // parse the sent data to json format
+  let registeredUser = await newUserData.json();
 
-  // using fetch api request method
-  fetch("http://localhost:8080/api/users")
-    .then((response) => {
-      // test if response is ok
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Network Response Error");
-      }
-    })
-    .then((data) => {
-      // first entry
-      let dbData = document.createElement("td");
-      dbData.innerText = `${data[0].id}`;
-      document.getElementById("firstRow").appendChild(dbData);
-      let dbDataFN = document.createElement("td");
-      dbDataFN.innerText = `${data[0].firstName}`;
-      document.getElementById("firstRow").appendChild(dbDataFN);
-      let dbDataLN = document.createElement("td");
-      dbDataLN.innerText = `${data[0].lastName}`;
-      document.getElementById("firstRow").appendChild(dbDataLN);
-      let dbDataEm = document.createElement("td");
-      dbDataEm.innerText = `${data[0].email}`;
-      document.getElementById("firstRow").appendChild(dbDataEm);
-      // second entry
-      dbData = document.createElement("td");
-      dbData.innerText = `${data[1].id}`;
-      document.getElementById("secondRow").appendChild(dbData);
-      dbDataFN = document.createElement("td");
-      dbDataFN.innerText = `${data[1].firstName}`;
-      document.getElementById("secondRow").appendChild(dbDataFN);
-      dbDataLN = document.createElement("td");
-      dbDataLN.innerText = `${data[1].lastName}`;
-      document.getElementById("secondRow").appendChild(dbDataLN);
-      dbDataEm = document.createElement("td");
-      dbDataEm.innerText = `${data[1].email}`;
-      document.getElementById("secondRow").appendChild(dbDataEm);
-      // third entry
-      dbData = document.createElement("td");
-      dbData.innerText = `${data[2].id}`;
-      document.getElementById("thirdRow").appendChild(dbData);
-      dbDataFN = document.createElement("td");
-      dbDataFN.innerText = `${data[2].firstName}`;
-      document.getElementById("thirdRow").appendChild(dbDataFN);
-      dbDataLN = document.createElement("td");
-      dbDataLN.innerText = `${data[2].lastName}`;
-      document.getElementById("thirdRow").appendChild(dbDataLN);
-      dbDataEm = document.createElement("td");
-      dbDataEm.innerText = `${data[2].email}`;
-      document.getElementById("thirdRow").appendChild(dbDataEm);
-    })
-
-    // handle errors
-    .catch((error) => {
-      console.error("Error: ", error);
-    });
+  // log sent data
+  console.log(registeredUser);
 }
 
-/********** Post ***********/
-// add new user
-function apiPost() {
-  const firstName = document.getElementById("apiFN").value;
-  const lastName = document.getElementById("apiLN").value;
-  const email = document.getElementById("email").value;
+/************************************************/
+/********* Get Registered User's Data ***********/
+/************************************************/
+// API endpoint for registered user
+let registeredUser = new URL('http://localhost:8080/api/user/${id}');
 
-  // API endpoint for creating a new user
-  const apiUrl = "http://localhost:8080/api/users";
+// Get is the default request using fetch method
+let registeredUserData = await fetch(registeredUser);
+
+// parse the received data into json format
+let registeredUserDataJson = await registeredUserData.json();
+
+/***********************************/
+/********** deposit cash ***********/
+/***********************************/
+async function deposit() {
+  const deposit = prompt('Deposit Amount: ');
 
   // Form data to be sent in the request body
-  const formData = {
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
+  const newBalance = {
+    balance: deposit,
   };
 
-  // Make a POST request using the Fetch API
-  fetch(apiUrl, {
-    method: "POST",
+  // Posting the data to the api using fetch method
+  let newBalanceData = await fetch(registeredUser, {
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json;charset=UTF-8',
     },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Network Response Error");
-      }
-    })
-    .then((newData) => {
-      // Process the newly created user data
-      console.log("New User Data:", newData);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+    // send the registeredUser in json format
+    body: JSON.stringify(newBalance),
+  });
+
+  // parse the sent data to json format
+  let depositedBalance = await newBalanceData.json();
+
+  // log sent data
+  console.log(depositedBalance);
 }
 
-/********** Put ***********/
-// change user
-function apiPut() {
-  const idNum = document.getElementById("idNum").value;
-  const firstName = document.getElementById("apinFN").value;
-  const lastName = document.getElementById("apinLN").value;
-  const email = document.getElementById("nemail").value;
-
-  // API endpoint for creating a new user
-  const apiUrl = `http://localhost:8080/api/users/${idNum}`;
+/***********************************/
+/********* withdraw cash ***********/
+/***********************************/
+async function withdraw() {
+  const withdraw = prompt('Withdraw Amount: ');
 
   // Form data to be sent in the request body
-  const formData = {
-    idNum: idNum,
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
+  const newBalance = {
+    balance: withdraw,
   };
 
-  // Make a put request using the Fetch API
-  fetch(apiUrl, {
-    method: "PUT",
+  // Posting the data to the api using fetch method
+  let newBalanceData = await fetch(registeredUser, {
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json;charset=UTF-8',
     },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Network Response Error");
-      }
-    })
-    .then((newData) => {
-      // Process the newly created user data
-      console.log("Modified:", newData);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+    // send the registeredUser in json format
+    body: JSON.stringify(newBalance),
+  });
+
+  // parse the sent data to json format
+  let withdrawnBalance = await newBalanceData.json();
+
+  // log sent data
+  console.log(withdrawnBalance);
 }
 
-/********** delete ***********/
-// add new user
-function apiDelete() {
-  const idNum = document.getElementById("idNum").value;
-  const firstName = document.getElementById("apinFN").value;
-  const lastName = document.getElementById("apinLN").value;
-  const email = document.getElementById("nemail").value;
-
-  // API endpoint for creating a new user
-  const apiUrl = `http://localhost:8080/api/users/${idNum}`;
+/*******************************/
+/********* send cash ***********/
+/*******************************/
+async function send() {
+  const receiver = prompt("Receiver's Phone Number: ");
+  const send = prompt('Amount: ');
 
   // Form data to be sent in the request body
-  const formData = {
-    idNum: idNum,
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
+  const newBalance = {
+    phone: receiver,
+    balance: send,
   };
 
-  // Make a delete request using the Fetch API
-  fetch(apiUrl, {
-    method: "DELETE",
+  // Posting the data to the api using fetch method
+  let newBalanceData = await fetch(registeredUser, {
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json;charset=UTF-8',
     },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Network Response Error");
-      }
-    })
-    .then((newData) => {
-      // Process the newly created user data
-      console.log("Deleted:", newData);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+    // send the registeredUser in json format
+    body: JSON.stringify(newBalance),
+  });
+
+  // parse the sent data to json format
+  let sentBalance = await newBalanceData.json();
+
+  // log sent data
+  console.log(sentBalance);
+}
+
+/********************************************/
+/********* delete registered user ***********/
+/********************************************/
+async function deleteAccount() {
+  const name = prompt('Confirm Username: ');
+  const phone = prompt('Confirm Phone Number: ');
+
+  // Form data to be sent in the request body
+  const currentUser = {
+    name: name,
+    phone: phone,
+  };
+
+  // Posting the data to the api using fetch method
+  let deletedUser = await fetch(registeredUser, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+    // send the registeredUser in json format
+    body: JSON.stringify(currentUser),
+  });
+
+  // parse the sent data to json format
+  let fullyDeletedUser = await deletedUser.json();
+
+  // log sent data
+  console.log(fullyDeletedUser.message);
 }

@@ -1,10 +1,10 @@
-package database.app;
+package com.sunless.groupThree;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AppApplicationTests {
+class GroupThreeApplicationTests {
 
 	@Test
 	void contextLoads() {
